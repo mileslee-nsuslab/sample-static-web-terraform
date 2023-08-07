@@ -1,6 +1,6 @@
 // S3 bucket resource
 resource "aws_s3_bucket" "frontend-dev-hosting-bucket-green" {
-  bucket = var.bucket_green_name
+  bucket = var.bucket_www_name
   force_destroy = true
 
   tags = {

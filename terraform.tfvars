@@ -1,5 +1,9 @@
-domain_name = "demo.test-for-lswoo.kro.kr"
+root_domain_name = "test-for-lswoo.kro.kr"
 
-bucket_blue_name = "miles-test-bucket-blue"
+root_wildcard_domain_name = "*.test-for-lswoo.kro.kr"
 
-bucket_green_name = "miles-test-bucket-green"
+www_domain_name = "www.test-for-lswoo.kro.kr"
+
+bucket_www_name = "miles-test-bucket-green"
+
+bucket_non_www_name = "miles-test-bucket-blue"

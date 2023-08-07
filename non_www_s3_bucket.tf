@@ -1,6 +1,6 @@
 // S3 bucket resource
 resource "aws_s3_bucket" "frontend-dev-hosting-bucket-blue" {
-  bucket = var.bucket_blue_name
+  bucket = var.bucket_non_www_name
   force_destroy = true
 
   tags = {
@@ -12,8 +12,9 @@ resource "aws_s3_bucket" "frontend-dev-hosting-bucket-blue" {
 resource "aws_s3_bucket_website_configuration" "frontend-dev-hosting-config-blue" {
   bucket = aws_s3_bucket.frontend-dev-hosting-bucket-blue.id
 
-  index_document {
-    suffix = "index.html"
+  redirect_all_requests_to {
+    host_name = var.www_domain_name
+    protocol = "https"
   }
 }
 

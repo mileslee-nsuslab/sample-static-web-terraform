@@ -1,7 +1,7 @@
-resource "aws_cloudfront_distribution" "front_dev_cf_distribution" {
+resource "aws_cloudfront_distribution" "front_dev_cf_distribution_www" {
   origin {
-    domain_name              = local.bucket_endpoint
-    origin_id                = local.bucket_endpoint
+    domain_name              = local.www_bucket_endpoint
+    origin_id                = local.www_bucket_endpoint
 
     // Required when domain_name refers S3 website endpoint
     custom_origin_config {
@@ -14,9 +14,9 @@ resource "aws_cloudfront_distribution" "front_dev_cf_distribution" {
 
   enabled             = true
   is_ipv6_enabled     = false
-  comment             = "This is DEMO distribution"
+  comment             = "This is for www version S3 distribution"
 
-  aliases = ["${var.domain_name}"]
+  aliases = ["${var.www_domain_name}"]
 
 
   default_cache_behavior {
@@ -24,14 +24,14 @@ resource "aws_cloudfront_distribution" "front_dev_cf_distribution" {
     cache_policy_id = "658327ea-f89d-4fab-a63d-7e88639e58f6"
     allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
-    target_origin_id = local.bucket_endpoint
+    target_origin_id = local.www_bucket_endpoint
 
     compress = true
 
     viewer_protocol_policy = "redirect-to-https"
-    min_ttl                = 0
-    default_ttl            = 3600
-    max_ttl                = 86400
+    # min_ttl                = 0
+    # default_ttl            = 3600
+    # max_ttl                = 86400
     
   }
 
@@ -42,9 +42,10 @@ resource "aws_cloudfront_distribution" "front_dev_cf_distribution" {
   }
 
   viewer_certificate {
-    acm_certificate_arn  =  aws_acm_certificate.demo_cert.arn
+    acm_certificate_arn  =  aws_acm_certificate.root_wildcard_cert.arn
     // Required specify acm_certificate_arn
     ssl_support_method = "sni-only"
+    minimum_protocol_version = "TLSv1.2_2021"
   }
 
   restrictions {

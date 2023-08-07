@@ -1,11 +1,20 @@
-variable "domain_name" {
+variable "root_domain_name" {
     type  = string
 }
 
-variable "bucket_blue_name" {
+variable "root_wildcard_domain_name" {
+    type  = string
+}
+
+variable "www_domain_name" {
     type = string
 }
 
-variable "bucket_green_name" {
+
+variable "bucket_non_www_name" {
+    type = string
+}
+
+variable "bucket_www_name" {
     type = string
 }
