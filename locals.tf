@@ -1,4 +1,4 @@
 locals {
-  www_bucket_endpoint = aws_s3_bucket_website_configuration.frontend-dev-hosting-config-green.website_endpoint
-  non_www_bucket_endpoint = aws_s3_bucket_website_configuration.frontend-dev-hosting-config-blue.website_endpoint
+  www_bucket_endpoint = aws_s3_bucket_website_configuration.frontend_dev_hosting_config_green.website_endpoint
+  non_www_bucket_endpoint = aws_s3_bucket_website_configuration.frontend_dev_hosting_config_blue.website_endpoint
 }

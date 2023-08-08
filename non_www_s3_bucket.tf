@@ -1,5 +1,5 @@
 // S3 bucket resource
-resource "aws_s3_bucket" "frontend-dev-hosting-bucket-blue" {
+resource "aws_s3_bucket" "frontend_dev_hosting_bucket_blue" {
   bucket = var.bucket_non_www_name
   force_destroy = true
 
@@ -9,8 +9,8 @@ resource "aws_s3_bucket" "frontend-dev-hosting-bucket-blue" {
 }
 
 // S3 bucket website hosting resource
-resource "aws_s3_bucket_website_configuration" "frontend-dev-hosting-config-blue" {
-  bucket = aws_s3_bucket.frontend-dev-hosting-bucket-blue.id
+resource "aws_s3_bucket_website_configuration" "frontend_dev_hosting_config_blue" {
+  bucket = aws_s3_bucket.frontend_dev_hosting_bucket_blue.id
 
   redirect_all_requests_to {
     host_name = var.www_domain_name
@@ -19,8 +19,8 @@ resource "aws_s3_bucket_website_configuration" "frontend-dev-hosting-config-blue
 }
 
 // S3 bucket public policy resource
-resource "aws_s3_bucket_public_access_block" "frontend-dev-public-policy-blue" {
-  bucket = aws_s3_bucket.frontend-dev-hosting-bucket-blue.id
+resource "aws_s3_bucket_public_access_block" "frontend_dev_public_policy_blue" {
+  bucket = aws_s3_bucket.frontend_dev_hosting_bucket_blue.id
 
   block_public_acls       = false
   block_public_policy     = false
@@ -29,7 +29,7 @@ resource "aws_s3_bucket_public_access_block" "frontend-dev-public-policy-blue" {
 }
 
 // S3 bucket policy resource
-resource "aws_s3_bucket_policy" "frontend-dev-bucket-policy-blue" {
-  bucket = aws_s3_bucket.frontend-dev-hosting-bucket-blue.id
+resource "aws_s3_bucket_policy" "frontend_dev_bucket_policy_blue" {
+  bucket = aws_s3_bucket.frontend_dev_hosting_bucket_blue.id
   policy = data.aws_iam_policy_document.allow_get_from_public_blue.json
 }
